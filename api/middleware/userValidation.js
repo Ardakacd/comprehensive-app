@@ -5,36 +5,41 @@ const BanError = require("../errors/banError");
 
 const validateUser = async (req, res, next) => {
   try {
-    let tokenHeader = req.headers["authorization"];
-    if (!tokenHeader) {
-      let error = new Error("Invalid header");
-      error.statusCode = 400;
-      next(error);
-    }
-    let token = null;
-    if (tokenHeader.startsWith("Bearer ")) {
-      token = tokenHeader.replace("Bearer ", "");
-    } else {
-      let error = new Error("Invalid header");
-      error.statusCode = 400;
-      next(error);
-    }
+    let token = req.cookies?.token;
 
     let userId = await verifyToken(token);
 
     let user = await User.findById(userId, "isBanned").exec();
 
     if (!user) {
-      next(new NotFoundError("User is not found!"));
+      clearCookie(res);
+      return next(new NotFoundError("User is not found!"));
     }
     if (!user.isBanned) {
       req.user = user;
-      next();
+      return next();
     } else {
-      next(new BanError());
+      clearCookie(res);
+      return next(new BanError());
     }
   } catch (error) {
-    next(error);
+    clearCookie(res);
+    return next(error);
+  }
+};
+
+const clearCookie = (res) => {
+  if (process.env.NODE_ENV == "development") {
+    res.clearCookie("token", {
+      secure: false,
+      sameSite: "strict",
+    });
+  } else {
+    res.clearCookie("token", {
+      secure: true,
+      httpOnly: true,
+      sameSite: "none",
+    });
   }
 };
 

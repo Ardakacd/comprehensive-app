@@ -103,6 +103,7 @@ router.patch("/:reviewId", async (req, res, next) => {
 router.delete("/:reviewId", async (req, res, next) => {
   delete req.body.id;
   delete req.body.ownerId;
+  delete req.body.owner;
   try {
     let review = await Review.findOne({ _id: req.params.reviewId }).exec();
 

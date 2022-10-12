@@ -38,24 +38,28 @@ const userSchema = new Schema({
 });
 
 userSchema.pre("save", function (next) {
-  bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS), (err, salt) => {
-    if (err) {
-      console.log(chalk.red("Error"));
-      console.log(chalk.red(err.message));
-      next(err.message);
-    }
-
-    bcrypt.hash(this.password, salt, (err, hash) => {
+  if (this.password && (this.isModified(this.password) || this.isNew)) {
+    bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS), (err, salt) => {
       if (err) {
         console.log(chalk.red("Error"));
         console.log(chalk.red(err.message));
         next(err.message);
       }
-      this.password = hash;
 
-      return next();
+      bcrypt.hash(this.password, salt, (err, hash) => {
+        if (err) {
+          console.log(chalk.red("Error"));
+          console.log(chalk.red(err.message));
+          next(err.message);
+        }
+        this.password = hash;
+
+        return next();
+      });
     });
-  });
+  } else {
+    return next();
+  }
 });
 
 const User = mongoose.model("User", userSchema);

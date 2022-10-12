@@ -34,6 +34,7 @@ const reviewSchema = new Schema(
 );
 
 reviewSchema.pre(/^find/, function (next) {
+  this.sort("-createdAt");
   this.populate({ path: "user", select: "username photo" });
 
   next();

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const slugify = require("slugify");
+const User = require("./userModel");
 
 const productSchema = new Schema(
   {
@@ -15,8 +16,9 @@ const productSchema = new Schema(
       type: String,
       unique: [true, "Slug is a unique field!"],
     },
-    ownerId: {
+    owner: {
       type: mongoose.ObjectId,
+      ref: User,
       required: [true, "Product should have an owner!"],
     },
     price: {
@@ -26,7 +28,7 @@ const productSchema = new Schema(
     },
     coverPhoto: {
       type: String,
-      required: [true, "Photo should have cover photo!"],
+      default: "unknownproduct.png",
     },
     albumPhotos: { type: [String] },
   },
@@ -41,6 +43,12 @@ productSchema.pre("save", function (next) {
   this.slug = slugify(this.name, {
     lower: true,
   });
+
+  next();
+});
+
+productSchema.pre("findOne", function (next) {
+  this.populate({ path: "owner", select: "username" });
 
   next();
 });
