@@ -1,0 +1,25 @@
+.container {
+  height: 90vh;
+  padding-left: 20rem;
+  padding-right: 20rem;
+  padding-top: 2rem;
+}
+
+.header {
+  color: aquamarine;
+}
+
+.buttonContainer {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.button {
+  margin-left: 0.5rem;
+}
+
+.photoHeader {
+  color: aquamarine;
+}

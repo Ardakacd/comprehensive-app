@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 2rem 10rem;
+}
+
+.infoContainer {
+  margin-left: 10rem;
+}
+
+.header {
+  color: aquamarine;
+}
+
+.infoKey {
+  color: orange;
+}
+
+.commentContainer {
+  padding: 0 10rem;
+}
+
+.commentHeader {
+  color: aquamarine;
+}

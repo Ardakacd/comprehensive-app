@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 5rem 10rem;
+}
+
+.infoContainer {
+  margin-left: 12rem;
+}
+
+.header {
+  color: aquamarine;
+}
+
+.infoKey {
+  color: orange;
+}
+
+.photoHeader {
+  margin-top: 3rem;
+  color: aquamarine;
+}

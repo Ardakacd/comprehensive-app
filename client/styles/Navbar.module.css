@@ -1,0 +1,35 @@
+.navbarContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: aquamarine;
+  height: 10vh;
+  padding-left: 15rem;
+  padding-right: 15rem;
+}
+
+.sideHeader {
+  color: white;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+
+.navbarFunc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbarLink {
+  font-size: 1.2rem;
+  margin-left: 1.5rem;
+  color: blue;
+}
+
+.logoutButton {
+  font-size: 1rem;
+  margin-left: 1.5rem;
+  color: yellow;
+}
