@@ -1,8 +1,8 @@
 # Information
 
 -You can login, register, add products, edit products, get products by paging or filtering etc. <br/>
--In api side node and express is used. <br/>
--In client side Nextjs and Redux is used. Also for styling material ui is used.<br/>
+-In api side node and express are used. <br/>
+-In client side Nextjs and Redux is used. Also for styling material ui are used.<br/>
 
 
 # Running Instructions
