@@ -1,0 +1,11 @@
+.container {
+  padding-left: 10vw;
+  padding-right: 10vw;
+  padding-top: 2vw;
+
+  padding-bottom: 5rem;
+}
+
+.header {
+  color: aquamarine;
+}
